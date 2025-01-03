@@ -30,6 +30,9 @@ git clone https://github.com/anhedoniczz/RedirectHunter.git
 # Navigate into the directory
 cd RedirectHunter
 
+# Make the script executable
+chmod +x redirecthunter.sh
+
 # Run the script
 ./redirecthunter.sh -u <domain>
 ```
