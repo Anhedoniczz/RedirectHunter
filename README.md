@@ -18,7 +18,6 @@ To use **RedirectHunter**, you'll need the following tools installed:
 - ```subfinder```
 - ```httpx-toolkit```
 - ```gau```
-- ```uro```
 - ```curl```
 
 ## Installation
