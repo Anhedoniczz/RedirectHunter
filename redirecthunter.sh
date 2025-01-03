@@ -40,7 +40,7 @@ echo "[+] Step 2: Checking for live subdomains using httpx-toolkit..."
 alivesubs=$(echo "$subdomains" | httpx-toolkit -ports 80,443,8000,8080,8888 -threads 200)
 
 echo "[+] Step 3: Crawling Parameters and filtering them..."
-links=$(echo "$alivesubs" | gau --threads 5 | uro)
+links=$(echo "$alivesubs" | gau --threads 5 )
 
 echo "[+] Filtering for potential open redirect parameters."
 filtered_links=$(echo "$links" | grep -E "(redirect_uri|next|url|return_to|target|destination|continue|prev)=(https?://)")
