@@ -47,8 +47,9 @@ filtered_links=$(echo "$links" | grep -E "(redirect_uri|next|url|return_to|targe
 
 echo "[+] Testing for open redirects..."
 for link in $filtered_links; do
-    response=$(curl -s -o /dev/null -w "%{http_code}" "$link")
-    if [[ "$response" =~ ^3 ]]; then
-        echo "[+] Open Redirect Detected: $link"
+    modified_link=$(echo "$link" | sed -E 's/(redirect_uri|next|url|return_to|target|destination|continue|prev)=[^&]+/\1=https:\/\/evil.com/')
+    response=$(echo "$modified_link" | xargs -I@ curl -I -s @ | grep "evil.com")
+    if [ -n "$response" ]; then
+        echo "[+] Open Redirect Detected: $modified_link"
     fi
 done
