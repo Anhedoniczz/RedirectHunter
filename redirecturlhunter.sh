@@ -43,13 +43,7 @@ echo "[+] Step 3: Crawling Parameters and filtering them..."
 links=$(echo "$alivesubs" | gau --threads 100 )
 
 echo "[+] Filtering for potential open redirect parameters."
-filtered_links=$(echo "$links" | grep -E "(redirect_uri|next|url|return_to|target|destination|continue|prev)=(https?://)")
+filtered_links=$(echo "$links" | grep -E "(redirect_uri|goto|next|url|return_to|target|destination|continue|prev)=(https?://)")
 
-echo "[+] Testing for open redirects..."
-for link in $filtered_links; do
-    modified_link=$(echo "$link" | sed -E 's/(redirect_uri|next|url|return_to|target|destination|continue|prev)=[^&]+/\1=https:\/\/evil.com/')
-    response=$(echo "$modified_link" | xargs -I@ curl -I -s @ | grep "evil.com")
-    if [ -n "$response" ]; then
-        echo "[+] Open Redirect Detected: $modified_link"
-    fi
+echo "[+] Test URLs Found: $filtered_links"
 done
