@@ -46,4 +46,4 @@ echo "[+] Filtering for potential open redirect parameters."
 filtered_links=$(echo "$links" | grep -E "(redirect_uri|goto|next|url|return_to|target|destination|continue|prev)=(https?://)")
 
 echo "[+] Test URLs Found: $filtered_links"
-done
+
